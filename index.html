@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Global Styles - Red Theme */
         :root {
             --primary: #D10000;
             --primary-dark: #B00000;
@@ -34,7 +33,6 @@
             color: var(--dark);
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
         }
 
         .container {
@@ -110,21 +108,30 @@
             background-color: #f1f5f9;
         }
 
-        /* Header Styles */
         header {
             background-color: var(--light);
             padding: 20px 0;
-            position: sticky;
+            position: fixed;
             top: 0;
+            width: 100%;
             z-index: 100;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
         }
 
         .header-scrolled {
+            padding: 10px 0;
             background-color: rgba(255, 248, 240, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-scrolled .logo img {
+            height: 40px;
+        }
+
+        .header-scrolled .logo-text {
+            font-size: 1rem;
         }
 
         .nav-container {
@@ -134,15 +141,27 @@
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary);
             display: flex;
             align-items: center;
+            gap: 15px;
         }
 
-        .logo span {
-            color: var(--secondary);
+        .logo img {
+            height: 60px;
+            transition: var(--transition);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            font-weight: 700;
+            font-size: 1.4rem;
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+            font-weight: 800;
         }
 
         .nav-links {
@@ -186,33 +205,56 @@
             color: var(--dark);
         }
 
-        /* Hero Section */
-        .hero {
-            position: relative;
+        .hero-carousel, .hero-slide {
             height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            margin: 0;
+            padding: 0;
         }
 
-        .hero-bg {
+        .hero-slide {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1549060279-7e168fce7090?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            z-index: -1;
+            opacity: 0;
+            animation: slide 10s infinite;
+        }
+
+        @keyframes slide {
+            0% {
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            45% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .hero-slide:nth-child(2) {
+            animation-delay: 5s;
         }
 
         .hero-content {
+            position: relative;
+            z-index: 2;
             text-align: center;
             max-width: 900px;
             padding: 0 20px;
-            z-index: 2;
+            color: white;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .hero h1 {
@@ -220,21 +262,10 @@
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: 20px;
-            color: white;
-        }
-
-        .hero h1 .highlight {
-            display: block;
-            background: linear-gradient(to right, var(--accent), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-top: 10px;
         }
 
         .hero p {
             font-size: 1.4rem;
-            color: #e2e8f0;
             margin-bottom: 40px;
             max-width: 700px;
             margin-left: auto;
@@ -248,9 +279,9 @@
             flex-wrap: wrap;
         }
 
-        /* About Company Section */
         .about-company {
             background-color: var(--light);
+            padding-top: 50px;
         }
 
         .about-grid {
@@ -308,7 +339,6 @@
             transform: translateX(5px);
         }
 
-        /* Core Values Section */
         .values {
             background: linear-gradient(to right, var(--primary-light), #FFE0E0);
         }
@@ -344,7 +374,6 @@
             margin-bottom: 10px;
         }
 
-        /* Why Choose Section */
         .why-choose {
             background-color: var(--light);
         }
@@ -393,7 +422,6 @@
             color: var(--gray);
         }
 
-        /* Products Section */
         .products {
             background-color: #f8fafc;
         }
@@ -449,7 +477,6 @@
             opacity: 0.9;
         }
 
-        /* Manufacturing Section */
         .manufacturing {
             background-color: #FFE0E0;
         }
@@ -511,7 +538,6 @@
             text-align: center;
         }
 
-        /* R&D Section */
         .rd-section {
             background: linear-gradient(to right, #0f172a, #1e293b);
             color: white;
@@ -526,7 +552,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1520006403909-838d6b92c22e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            background: url('https://images.unsplash.com/photo-1583744946564-b52ac1c389c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
             opacity: 0.2;
             z-index: 1;
         }
@@ -572,7 +598,6 @@
             color: var(--accent);
         }
 
-        /* Production Process Section */
         .production-process {
             background-color: #f8fafc;
             padding: 100px 0;
@@ -650,7 +675,6 @@
             color: var(--gray);
         }
 
-        /* Catalogue Section */
         .catalogue {
             background: linear-gradient(to right, var(--primary-light), #FFE0E0);
         }
@@ -683,7 +707,6 @@
             color: var(--gray);
         }
 
-        /* Contact Section */
         .contact {
             background-color: var(--light);
         }
@@ -783,7 +806,6 @@
             border: none;
         }
 
-        /* CTA Section */
         .cta {
             padding: 100px 0;
             background: linear-gradient(to right, var(--primary), var(--secondary));
@@ -810,11 +832,26 @@
             flex-wrap: wrap;
         }
 
-        /* Footer */
         footer {
             background-color: var(--dark);
             color: white;
             padding: 60px 0 30px;
+            position: relative;
+        }
+
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+
+        .language-selector select {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            background-color: white;
+            font-size: 1rem;
         }
 
         .footer-content {
@@ -915,29 +952,24 @@
         .footer-legal a:hover {
             color: var(--accent);
         }
-        
-        /* Two-line logo styles */
+
         .footer-logo {
             display: flex;
             flex-direction: column;
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary);
-            line-height: 1.1;
+            align-items: flex-start;
         }
-        
-        .footer-logo span {
-            color: var(--secondary);
+
+        .footer-logo img {
+            height: 70px;
+            margin-bottom: 15px;
         }
-        
+
         .footer-logo-text {
             font-size: 0.9rem;
             color: #94a3b8;
-            margin-top: 15px;
             max-width: 250px;
         }
 
-        /* Scroll Animation Classes */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -982,7 +1014,6 @@
             transform: scale(1);
         }
 
-        /* WhatsApp Button */
         .whatsapp-btn {
             position: fixed;
             bottom: 30px;
@@ -1007,16 +1038,15 @@
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* Responsive Design */
         @media (max-width: 992px) {
             .hero h1 {
                 font-size: 2.8rem;
             }
-            
+
             .hero p {
                 font-size: 1.2rem;
             }
-            
+
             .section-title h2 {
                 font-size: 2.3rem;
             }
@@ -1028,9 +1058,13 @@
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
-            
+
             .rd-content {
                 flex-direction: column;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
             }
         }
 
@@ -1046,35 +1080,43 @@
                 padding: 20px;
                 box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             }
-            
+
             .mobile-menu-btn {
                 display: block;
             }
-            
+
             .hero h1 {
                 font-size: 2.3rem;
             }
-            
+
             .hero-buttons, .cta-buttons {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .btn {
                 width: 100%;
                 max-width: 300px;
             }
-            
+
             .section-title h2 {
                 font-size: 2rem;
             }
-            
+
             .section-title p {
                 font-size: 1rem;
             }
-            
+
             .product-img-container {
                 height: 250px;
+            }
+
+            .logo img {
+                height: 50px;
+            }
+
+            .logo-text {
+                display: none;
             }
         }
 
@@ -1082,11 +1124,11 @@
             .hero h1 {
                 font-size: 2rem;
             }
-            
+
             .hero p {
                 font-size: 1.1rem;
             }
-            
+
             .feature-card, .product-card {
                 max-width: 350px;
                 margin: 0 auto;
@@ -1099,19 +1141,26 @@
                 height: 50px;
                 font-size: 1.5rem;
             }
+
+            .logo img {
+                height: 45px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- WhatsApp Button -->
     <a href="https://wa.me/923127696855" class="whatsapp-btn" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
-
-    <!-- Header -->
     <header>
         <div class="container nav-container">
-            <div class="logo">KH<span>AYAMS</span> INTERNATIONAL</div>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/khayamsinternational/Khayamswebsitemedia/refs/heads/main/Logo%20in%20Circle.png" alt="Khayams International Logo">
+                <div class="logo-text">
+                    <div>KHAYAMS</div>
+                    <div>INTERNATIONAL</div>
+                </div>
+            </div>
             <nav class="nav-links">
                 <a href="#home">Home</a>
                 <a href="#about">About Us</a>
@@ -1125,31 +1174,38 @@
             </button>
         </div>
     </header>
-
-    <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-bg"></div>
-        <div class="hero-content">
-            <h1>Step Into Success With Our Manufacturing Expertise</h1>
-            <p class="highlight">Powering Performance. Delivering Worldwide.</p>
-            <p>Premium Sportswear | Trusted Exporter | Performance-Driven Manufacturing</p>
-            <div class="hero-buttons">
-                <a href="#products" class="btn slide-in-left">
-                    View Our Products
-                </a>
-                <a href="#catalogue" class="btn btn-outline slide-in-right">View Catalogue</a>
+        <div class="hero-carousel">
+            <div class="hero-slide active" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('https://raw.githubusercontent.com/khayamsinternational/Khayamswebsitemedia/refs/heads/main/Banner%201.png');">
+                <div class="hero-content">
+                    <h1>Step Into Success With Our Manufacturing Expertise</h1>
+                    <p class="highlight">Powering Performance. Delivering Worldwide.</p>
+                    <p>Premium Sportswear | Trusted Exporter | Performance-Driven Manufacturing</p>
+                    <div class="hero-buttons">
+                        <a href="#products" class="btn slide-in-left">View Our Products</a>
+                        <a href="#catalogue" class="btn btn-outline slide-in-right">View Catalogue</a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('https://raw.githubusercontent.com/khayamsinternational/Khayamswebsitemedia/refs/heads/main/Banner%202.jpg');">
+                <div class="hero-content">
+                    <h1>Manufacture of Quality Apparels for Global Brands</h1>
+                    <p class="highlight">Pakistan's Top Apparels Manufacturers</p>
+                    <p>Trusted Apparels Manufacturer for Global Brands | Compliance with International Standards & Audits | Fast Production & Delivery to Global</p>
+                    <div class="hero-buttons">
+                        <a href="#products" class="btn slide-in-left">View Our Products</a>
+                        <a href="#catalogue" class="btn btn-outline slide-in-right">View Catalogue</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-
-    <!-- About Company Section -->
     <section class="about-company" id="about">
         <div class="container">
             <div class="section-title">
                 <h2 class="fade-in">About Khayams International</h2>
                 <p class="fade-in">Decades of excellence in sportswear manufacturing and global distribution</p>
             </div>
-
             <div class="about-grid">
                 <div class="about-card fade-in">
                     <div class="about-icon">
@@ -1159,7 +1215,6 @@
                     <p>Khayams International is dedicated to producing high-quality sportswear for businesses around the globe. With years of expertise and innovation at our core, we create reliable solutions designed to meet your business needs and exceed expectations.</p>
                     <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="about-card fade-in">
                     <div class="about-icon">
                         <i class="fas fa-users"></i>
@@ -1168,7 +1223,6 @@
                     <p>Our team is a diverse group of skilled professionals, collaborating to bring fresh ideas and innovative solutions. We prioritize teamwork, creativity, and a commitment to delivering outstanding results.</p>
                     <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="about-card fade-in">
                     <div class="about-icon">
                         <i class="fas fa-microscope"></i>
@@ -1180,34 +1234,28 @@
             </div>
         </div>
     </section>
-
-    <!-- Core Values Section -->
     <section class="values">
         <div class="container">
             <div class="section-title">
                 <h2 class="fade-in">Our Core Values</h2>
                 <p class="fade-in">The principles that guide everything we do</p>
             </div>
-
             <div class="values-grid">
                 <div class="value-card slide-in-left">
                     <i class="fas fa-medal"></i>
                     <h4>Excellence</h4>
                     <p>We deliver what we promise — garments that meet global standards of quality and performance.</p>
                 </div>
-
                 <div class="value-card fade-in">
                     <i class="fas fa-handshake"></i>
                     <h4>Partnership</h4>
                     <p>Our clients are more than customers. They are our partners in success.</p>
                 </div>
-
                 <div class="value-card fade-in">
                     <i class="fas fa-lightbulb"></i>
                     <h4>Innovation</h4>
                     <p>We constantly invest in new materials, sustainable fabrics, and cutting-edge designs.</p>
                 </div>
-
                 <div class="value-card slide-in-right">
                     <i class="fas fa-pen-ruler"></i>
                     <h4>Craftsmanship</h4>
@@ -1216,15 +1264,12 @@
             </div>
         </div>
     </section>
-
-    <!-- Why Choose Section -->
     <section class="why-choose">
         <div class="container">
             <div class="section-title">
                 <h2 class="fade-in">Why Choose Khayams International?</h2>
                 <p class="fade-in">With years of expertise in manufacturing and exporting, we deliver world-class sportswear solutions</p>
             </div>
-            
             <div class="features-grid">
                 <div class="feature-card slide-in-left">
                     <div class="feature-icon">
@@ -1233,7 +1278,6 @@
                     <h3>40,000 sq. ft. Facility</h3>
                     <p>Modern manufacturing facility in Sialkot, Pakistan with advanced production lines</p>
                 </div>
-
                 <div class="feature-card fade-in">
                     <div class="feature-icon">
                         <i class="fas fa-cogs"></i>
@@ -1241,7 +1285,6 @@
                     <h3>High-End Machinery</h3>
                     <p>DESMA PU Injection and other advanced equipment for precision manufacturing</p>
                 </div>
-
                 <div class="feature-card slide-in-right">
                     <div class="feature-icon">
                         <i class="fas fa-globe-asia"></i>
@@ -1252,42 +1295,34 @@
             </div>
         </div>
     </section>
-
-    <!-- Products Section -->
     <section class="products" id="products">
         <div class="container">
             <div class="section-title">
                 <h2 class="fade-in">Our Product Range</h2>
                 <p class="fade-in">Comprehensive sportswear solutions for every athletic need</p>
             </div>
-
             <div class="products-grid">
                 <div class="product-card slide-in-left">
                     <div class="product-img-container">
-                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Sportswear" class="product-img">
+                        <img src="https://raw.githubusercontent.com/khayamsinternational/Khayamswebsitemedia/refs/heads/main/Sportswear.jpg" alt="Sportswear" class="product-img">
                     </div>
                     <div class="product-overlay">
                         <h3>Sportswear</h3>
                         <p>Track Suits, Hoodies, T-shirts</p>
                     </div>
                 </div>
-
                 <div class="product-card fade-in">
                     <div class="product-img-container">
-                        <img src="https://images.unsplash.com/photo-1571019614242-c5e5a044b0a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Activewear" class="product-img">
+                        <img src="https://raw.githubusercontent.com/khayamsinternational/Khayamswebsitemedia/refs/heads/main/Activewear.jpg" alt="Activewear" class="product-img">
                     </div>
                     <div class="product-overlay">
                         <h3>Activewear</h3>
                         <p>Leggings, Compression Tops, Gym Wear</p>
                     </div>
                 </div>
-
                 <div class="product-card slide-in-right">
                     <div class="product-img-container">
-                        <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Soccerwear" class="product-img">
+                        <img src="https://raw.githubusercontent.com/khayamsinternational/Khayamswebsitemedia/refs/heads/main/Soccerwear.jpg" alt="Soccerwear" class="product-img">
                     </div>
                     <div class="product-overlay">
                         <h3>Soccerwear</h3>
@@ -1297,15 +1332,12 @@
             </div>
         </div>
     </section>
-
-    <!-- Manufacturing Section -->
     <section class="manufacturing" id="manufacturing">
         <div class="container">
             <div class="section-title">
                 <h2 class="fade-in">Manufacturing Excellence</h2>
                 <p class="fade-in">Precision production and global distribution capabilities</p>
             </div>
-
             <div class="manufacturing-stats">
                 <div class="stat-card slide-in-left">
                     <div class="number">100,000+</div>
@@ -1320,7 +1352,6 @@
                     <div class="label">Companies Work With Us</div>
                 </div>
             </div>
-
             <div class="certificates">
                 <div class="certificate slide-in-left">
                     <i class="fas fa-certificate"></i>
@@ -1341,8 +1372,6 @@
             </div>
         </div>
     </section>
-
-    <!-- R&D Section -->
     <section class="rd-section">
         <div class="container">
             <div class="rd-content">
@@ -1353,20 +1382,17 @@
                     <a href="#contact" class="btn btn-outline mt-20">GET IN TOUCH</a>
                 </div>
                 <div class="rd-image slide-in-right">
-                    <img src="https://images.unsplash.com/photo-1520006403909-838d6b92c22e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Research and Development">
+                    <img src="https://raw.githubusercontent.com/khayamsinternational/Khayamswebsitemedia/refs/heads/main/R%26D.png" alt="Research and Development">
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Production Process Section -->
     <section class="production-process" id="process">
         <div class="process-container">
             <div class="process-intro">
                 <h2 class="fade-in">Our Production Process</h2>
                 <p class="fade-in">Our manufacturing process combines traditional craftsmanship with cutting-edge technology to ensure every product meets the highest standards of quality and performance.</p>
             </div>
-            
             <div class="process-steps">
                 <div class="process-step slide-in-left">
                     <div class="step-number">1</div>
@@ -1376,7 +1402,6 @@
                     <h3 class="step-title">Design & Development</h3>
                     <p class="step-description">Custom designs and prototyping based on client requirements</p>
                 </div>
-                
                 <div class="process-step fade-in">
                     <div class="step-number">2</div>
                     <div class="step-icon">
@@ -1385,7 +1410,6 @@
                     <h3 class="step-title">Material Sourcing</h3>
                     <p class="step-description">Premium fabrics and materials from certified suppliers</p>
                 </div>
-                
                 <div class="process-step fade-in">
                     <div class="step-number">3</div>
                     <div class="step-icon">
@@ -1394,7 +1418,6 @@
                     <h3 class="step-title">Production & Quality Control</h3>
                     <p class="step-description">Precision manufacturing with multiple quality checkpoints</p>
                 </div>
-                
                 <div class="process-step slide-in-right">
                     <div class="step-number">4</div>
                     <div class="step-icon">
@@ -1406,18 +1429,15 @@
             </div>
         </div>
     </section>
-
-    <!-- Catalogue Section -->
     <section class="catalogue" id="catalogue">
         <div class="container">
             <div class="section-title">
                 <h2 class="fade-in">Product Catalogue</h2>
                 <p class="fade-in">Explore our comprehensive range of sportswear products</p>
             </div>
-
             <div class="catalogue-container">
                 <div class="catalogue-image slide-in-left">
-                    <img src="https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Product Catalogue">
+                    <img src="https://raw.githubusercontent.com/khayamsinternational/Khayamswebsitemedia/refs/heads/main/Catalog%20Cover.jpg" alt="Product Catalogue">
                 </div>
                 <div class="catalogue-text slide-in-right">
                     <h3>Explore the Full Collection</h3>
@@ -1429,15 +1449,12 @@
             </div>
         </div>
     </section>
-
-    <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
             <div class="section-title">
                 <h2 class="fade-in">Get In Touch</h2>
                 <p class="fade-in">We'd love to hear from you. Contact us for inquiries or quotes.</p>
             </div>
-
             <div class="contact-container">
                 <div class="contact-info slide-in-left">
                     <h3>Contact Information</h3>
@@ -1464,28 +1481,23 @@
                             </div>
                         </div>
                     </div>
-                    
                     <h3>Connect With Us</h3>
                     <div class="social-links">
-                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.facebook.com/khayamsinternational" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/khayamsINTL" class="social-icon" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/khayamsinternational" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="http://linkedin.com/company/khayamsinternational" class="social-icon" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                
                 <div class="contact-form slide-in-right">
                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScDN6Gx6VhjmZrUVV321HFx_UlMI4aaokX9Vt-Q9qE6x2XsEQ/viewform?embedded=true" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
                 </div>
             </div>
-            
             <div class="map-container fade-in">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3397.225794768946!2d74.51641031514878!3d32.49976348128989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391eea0e7d6c9a5d%3A0xf9f0a7c5b9e7c1b!2sSialkot%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1651234567890!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d53845.72612060161!2d74.54500676922657!3d32.48986255826989!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x49b13156ab952d4f%3A0xf78e97462400ab!2sKhayams%20International!5e0!3m2!1sen!2s!4v1751614384212!5m2!1sen!2s" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
-
-    <!-- CTA Section -->
     <section class="cta" id="cta">
         <div class="container">
             <h2 class="fade-in">Ready to Partner with Us?</h2>
@@ -1496,25 +1508,36 @@
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
     <footer>
+        <div class="language-selector">
+            <select onchange="window.location.href=this.value">
+                <option value="">Select Language</option>
+                <option value="?lang=ar">Arabic</option>
+                <option value="?lang=zh-CN">Chinese (Simplified)</option>
+                <option value="?lang=nl">Dutch</option>
+                <option value="?lang=en" selected>English</option>
+                <option value="?lang=fr">French</option>
+                <option value="?lang=de">German</option>
+                <option value="?lang=it">Italian</option>
+                <option value="?lang=pt">Portuguese</option>
+                <option value="?lang=ru">Russian</option>
+                <option value="?lang=es">Spanish</option>
+            </select>
+        </div>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column fade-in">
                     <div class="footer-logo">
-                        <div>KHA<span>YAMS</span></div>
-                        <div>INTERNATIONAL</div>
+                        <img src="https://raw.githubusercontent.com/khayamsinternational/Khayamswebsitemedia/refs/heads/main/Logo%20in%20Circle.png" alt="Khayams International Logo">
+                        <p class="footer-logo-text">Sportswear Excellence — Leading manufacturer and global exporter of activewear and soccerwear.</p>
                     </div>
-                    <p class="footer-logo-text">Sportswear Excellence — Leading manufacturer and global exporter of activewear and soccerwear.</p>
                     <div class="footer-social">
-                        <a href="#" class="social-icon-footer"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon-footer"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon-footer"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon-footer"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.facebook.com/khayamsinternational" class="social-icon-footer" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/khayamsINTL" class="social-icon-footer" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/khayamsinternational" class="social-icon-footer" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="http://linkedin.com/company/khayamsinternational" class="social-icon-footer" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                
                 <div class="footer-column fade-in">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
@@ -1526,7 +1549,6 @@
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-                
                 <div class="footer-column fade-in">
                     <h3>Product Categories</h3>
                     <ul class="footer-links">
@@ -1535,27 +1557,22 @@
                         <li><a href="#">Soccerwear</a></li>
                     </ul>
                 </div>
-                
                 <div class="footer-column fade-in">
                     <h3>Contact Us</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Unit No 3, Street No 8, Rangpura, Sialkot, Pakistan</a></li>
+                        <li><a href="#">Unit No 3, Street No 8, Rangpura, Sialkot, Punjab, 51310, Pakistan</a></li>
                         <li><a href="tel:+923127696855">+92 312 7696855</a></li>
                         <li><a href="mailto:info@khayamsinternational.com">info@khayamsinternational.com</a></li>
                     </ul>
                 </div>
             </div>
-            
             <div class="copyright fade-in">
                 <p>&copy; 2025 Khayams International. All rights reserved.</p>
             </div>
         </div>
     </footer>
-
     <script>
-        // Scroll animation functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Function to check if element is in viewport
             function isInViewport(element) {
                 const rect = element.getBoundingClientRect();
                 return (
@@ -1563,25 +1580,19 @@
                     rect.bottom >= 0
                 );
             }
-            
-            // Function to handle scroll animations
+
             function handleScrollAnimations() {
                 const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .zoom-in');
-                
                 animatedElements.forEach(element => {
                     if (isInViewport(element)) {
                         element.classList.add('appear');
                     }
                 });
             }
-            
-            // Initial check on page load
+
             handleScrollAnimations();
-            
-            // Check on scroll
             window.addEventListener('scroll', handleScrollAnimations);
-            
-            // Header scroll effect
+
             window.addEventListener('scroll', function() {
                 const header = document.querySelector('header');
                 if (window.scrollY > 50) {
@@ -1590,39 +1601,50 @@
                     header.classList.remove('header-scrolled');
                 }
             });
-            
-            // Smooth scrolling for navigation links
+
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
                     document.querySelector(this.getAttribute('href')).scrollIntoView({
                         behavior: 'smooth'
                     });
-                    
-                    // Close mobile menu if open
+
                     if (window.innerWidth <= 768) {
                         document.querySelector('.nav-links').style.display = 'none';
                     }
                 });
             });
-            
-            // Mobile menu toggle
+
             const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
             const navLinks = document.querySelector('.nav-links');
-            
+
             mobileMenuBtn.addEventListener('click', function() {
                 navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
             });
-            
-            // Close mobile menu when clicking outside
+
             document.addEventListener('click', function(e) {
-                if (window.innerWidth <= 768 && 
-                    !e.target.closest('.nav-links') && 
+                if (window.innerWidth <= 768 &&
+                    !e.target.closest('.nav-links') &&
                     !e.target.closest('.mobile-menu-btn') &&
                     navLinks.style.display === 'flex') {
                     navLinks.style.display = 'none';
                 }
             });
+
+            const slides = document.querySelectorAll('.hero-slide');
+            let currentSlide = 0;
+
+            function showSlide(n) {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (n + slides.length) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+
+            setInterval(nextSlide, 5000);
         });
     </script>
 </body>
