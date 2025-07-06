@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -131,7 +132,6 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            text-decoration: none;
         }
         .logo img {
             height: 60px;
@@ -145,7 +145,7 @@
             line-height: 1.2;
         }
         .logo-text span {
-            color: black;
+            color: var(--primary);
             font-weight: 800;
         }
         .nav-links {
@@ -203,9 +203,6 @@
             cursor: pointer;
             font-size: 0.9rem;
             transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
         .translate-btn:hover {
             background-color: var(--primary-dark);
@@ -221,40 +218,6 @@
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
             color: var(--dark);
-        }
-        .translate-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-            width: 250px;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        .translate-dropdown.show {
-            display: flex;
-        }
-        .translate-option {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 12px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .translate-option:hover {
-            background-color: #f1f5f9;
-        }
-        .translate-option img {
-            width: 24px;
-            height: 16px;
-            object-fit: contain;
         }
         /* Hero Section - Carousel */
         .hero {
@@ -1048,13 +1011,13 @@
     <!-- Header -->
     <header>
         <div class="container nav-container">
-            <a href="index.html" class="logo">
+            <div class="logo">
                 <img src="https://raw.githubusercontent.com/khayamsinternational/Khayamswebsitemedia/refs/heads/main/Logo%20in%20Circle.png" alt="Khayams International Logo">
                 <div class="logo-text">
                     <div>KHAYAMS</div>
                     <div>INTERNATIONAL</div>
                 </div>
-            </a>
+            </div>
             <nav class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="about.html">About Us</a>
@@ -1068,52 +1031,7 @@
         </div>
         <!-- Language Translator -->
         <div class="language-translator">
-            <button class="translate-btn">
-                <img src="https://flagcdn.com/w20/gb.png" srcset="https://flagcdn.com/w40/gb.png 2x" width="20" alt="English">
-                <span>Translate</span>
-            </button>
-            <div class="translate-dropdown">
-                <div class="translate-option" data-lang="en">
-                    <img src="https://flagcdn.com/w20/gb.png" srcset="https://flagcdn.com/w40/gb.png 2x" width="24" alt="English">
-                    <span>English</span>
-                </div>
-                <div class="translate-option" data-lang="es">
-                    <img src="https://flagcdn.com/w20/es.png" srcset="https://flagcdn.com/w40/es.png 2x" width="24" alt="Spanish">
-                    <span>Spanish</span>
-                </div>
-                <div class="translate-option" data-lang="fr">
-                    <img src="https://flagcdn.com/w20/fr.png" srcset="https://flagcdn.com/w40/fr.png 2x" width="24" alt="French">
-                    <span>French</span>
-                </div>
-                <div class="translate-option" data-lang="de">
-                    <img src="https://flagcdn.com/w20/de.png" srcset="https://flagcdn.com/w40/de.png 2x" width="24" alt="German">
-                    <span>German</span>
-                </div>
-                <div class="translate-option" data-lang="it">
-                    <img src="https://flagcdn.com/w20/it.png" srcset="https://flagcdn.com/w40/it.png 2x" width="24" alt="Italian">
-                    <span>Italian</span>
-                </div>
-                <div class="translate-option" data-lang="pt">
-                    <img src="https://flagcdn.com/w20/pt.png" srcset="https://flagcdn.com/w40/pt.png 2x" width="24" alt="Portuguese">
-                    <span>Portuguese</span>
-                </div>
-                <div class="translate-option" data-lang="ru">
-                    <img src="https://flagcdn.com/w20/ru.png" srcset="https://flagcdn.com/w40/ru.png 2x" width="24" alt="Russian">
-                    <span>Russian</span>
-                </div>
-                <div class="translate-option" data-lang="zh-CN">
-                    <img src="https://flagcdn.com/w20/cn.png" srcset="https://flagcdn.com/w40/cn.png 2x" width="24" alt="Chinese">
-                    <span>Chinese</span>
-                </div>
-                <div class="translate-option" data-lang="ar">
-                    <img src="https://flagcdn.com/w20/sa.png" srcset="https://flagcdn.com/w40/sa.png 2x" width="24" alt="Arabic">
-                    <span>Arabic</span>
-                </div>
-                <div class="translate-option" data-lang="nl">
-                    <img src="https://flagcdn.com/w20/nl.png" srcset="https://flagcdn.com/w40/nl.png 2x" width="24" alt="Dutch">
-                    <span>Dutch</span>
-                </div>
-            </div>
+            <button class="translate-btn">Translate</button>
             <div id="google_translate_element" style="display: none;"></div>
         </div>
     </header>
@@ -1533,29 +1451,9 @@
             });
             // Translate button functionality
             const translateBtn = document.querySelector('.translate-btn');
-            const translateDropdown = document.querySelector('.translate-dropdown');
-            translateBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                translateDropdown.classList.toggle('show');
-            });
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.language-translator')) {
-                    translateDropdown.classList.remove('show');
-                }
-            });
-            // Language selection
-            const translateOptions = document.querySelectorAll('.translate-option');
-            translateOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    const select = document.querySelector('.goog-te-combo');
-                    if (select) {
-                        select.value = lang;
-                        select.dispatchEvent(new Event('change'));
-                    }
-                    translateDropdown.classList.remove('show');
-                });
+            const translateWidget = document.querySelector('#google_translate_element');
+            translateBtn.addEventListener('click', function() {
+                translateWidget.style.display = translateWidget.style.display === 'none' ? 'block' : 'none';
             });
             // Footer scroll effect
             window.addEventListener('scroll', function() {
