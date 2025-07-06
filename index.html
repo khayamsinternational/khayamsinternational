@@ -190,73 +190,6 @@
             cursor: pointer;
             color: var(--dark);
         }
-        /* Language Translator */
-        .language-translator {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 101;
-            transition: all 0.3s ease;
-        }
-        .language-translator.hidden {
-            transform: translateY(-100%);
-            opacity: 0;
-            pointer-events: none;
-        }
-        .translate-btn {
-            padding: 8px 12px;
-            background-color: var(--primary);
-            color: white;
-            border-radius: 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--transition);
-        }
-        .translate-btn img {
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        .translate-btn:hover {
-            background-color: var(--primary-dark);
-        }
-        .translate-btn i {
-            font-size: 0.7rem;
-            margin-left: 5px;
-        }
-        .language-dropdown {
-            display: none;
-            position: absolute;
-            background-color: white;
-            min-width: 200px;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            z-index: 1;
-            right: 0;
-            top: 100%;
-            margin-top: 5px;
-        }
-        .language-dropdown.show {
-            display: block;
-        }
-        .language-option {
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .language-option:hover {
-            background-color: #f1f1f1;
-        }
-        .language-option img {
-            width: 20px;
-            border-radius: 50%;
-        }
         /* Hero Section - Carousel */
         .hero {
             position: relative;
@@ -1068,49 +1001,148 @@
             <span>English</span>
             <i class="fas fa-chevron-down"></i>
         </button>
-        <div class="language-dropdown">
-            <div class="language-option" data-lang="en">
-                <img src="https://flagcdn.com/w20/gb.png" alt="English">
-                <span>English</span>
-            </div>
-            <div class="language-option" data-lang="es">
-                <img src="https://flagcdn.com/w20/es.png" alt="Spanish">
-                <span>Spanish</span>
-            </div>
-            <div class="language-option" data-lang="fr">
-                <img src="https://flagcdn.com/w20/fr.png" alt="French">
-                <span>French</span>
-            </div>
-            <div class="language-option" data-lang="de">
-                <img src="https://flagcdn.com/w20/de.png" alt="German">
-                <span>German</span>
-            </div>
-            <div class="language-option" data-lang="it">
-                <img src="https://flagcdn.com/w20/it.png" alt="Italian">
-                <span>Italian</span>
-            </div>
-            <div class="language-option" data-lang="pt">
-                <img src="https://flagcdn.com/w20/pt.png" alt="Portuguese">
-                <span>Portuguese</span>
-            </div>
-            <div class="language-option" data-lang="ru">
-                <img src="https://flagcdn.com/w20/ru.png" alt="Russian">
-                <span>Russian</span>
-            </div>
-            <div class="language-option" data-lang="zh-CN">
-                <img src="https://flagcdn.com/w20/cn.png" alt="Chinese">
-                <span>Chinese</span>
-            </div>
-            <div class="language-option" data-lang="nl">
-                <img src="https://flagcdn.com/w20/nl.png" alt="Dutch">
-                <span>Dutch</span>
-            </div>
-            <div class="language-option" data-lang="ar">
-                <img src="https://flagcdn.com/w20/sa.png" alt="Arabic">
-                <span>Arabic</span>
-            </div>
-        </div>
+        <div id="google_translate_element" style="display: none;"></div>
     </div>
+
+    <style>
+        /* Language Translator Updates */
+        .language-translator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        .translate-btn {
+            padding: 8px 12px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        .translate-btn img {
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .translate-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        .translate-btn i {
+            font-size: 0.7rem;
+            margin-left: 5px;
+        }
+        .goog-te-gadget {
+            font-size: 0;
+        }
+        .goog-te-gadget .goog-te-combo {
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            background: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+        /* Flag styles for Google Translate dropdown */
+        .goog-te-gadget img {
+            display: none !important;
+        }
+        .goog-te-gadget span {
+            display: inline-block;
+            padding: 0 5px;
+        }
+        .goog-te-gadget span:before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 15px;
+            margin-right: 5px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            vertical-align: middle;
+        }
+        /* Add specific flags for languages */
+        .goog-te-gadget span[value="en"]:before {
+            background-image: url('https://flagcdn.com/w20/gb.png');
+        }
+        .goog-te-gadget span[value="es"]:before {
+            background-image: url('https://flagcdn.com/w20/es.png');
+        }
+        .goog-te-gadget span[value="fr"]:before {
+            background-image: url('https://flagcdn.com/w20/fr.png');
+        }
+        .goog-te-gadget span[value="de"]:before {
+            background-image: url('https://flagcdn.com/w20/de.png');
+        }
+        .goog-te-gadget span[value="it"]:before {
+            background-image: url('https://flagcdn.com/w20/it.png');
+        }
+        .goog-te-gadget span[value="pt"]:before {
+            background-image: url('https://flagcdn.com/w20/pt.png');
+        }
+        .goog-te-gadget span[value="ru"]:before {
+            background-image: url('https://flagcdn.com/w20/ru.png');
+        }
+        .goog-te-gadget span[value="zh-CN"]:before {
+            background-image: url('https://flagcdn.com/w20/cn.png');
+        }
+        .goog-te-gadget span[value="nl"]:before {
+            background-image: url('https://flagcdn.com/w20/nl.png');
+        }
+        .goog-te-gadget span[value="ar"]:before {
+            background-image: url('https://flagcdn.com/w20/sa.png');
+        }
+    </style>
+
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'ar,zh-CN,nl,en,fr,de,it,pt,ru,es',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+
+            // Add flags to language options after a short delay
+            setTimeout(addFlagsToLanguageOptions, 500);
+        }
+
+        function addFlagsToLanguageOptions() {
+            const languageOptions = document.querySelectorAll('.goog-te-combo option');
+            languageOptions.forEach(option => {
+                const langCode = option.value;
+                let flagUrl = '';
+
+                switch(langCode) {
+                    case 'en': flagUrl = 'https://flagcdn.com/w20/gb.png'; break;
+                    case 'es': flagUrl = 'https://flagcdn.com/w20/es.png'; break;
+                    case 'fr': flagUrl = 'https://flagcdn.com/w20/fr.png'; break;
+                    case 'de': flagUrl = 'https://flagcdn.com/w20/de.png'; break;
+                    case 'it': flagUrl = 'https://flagcdn.com/w20/it.png'; break;
+                    case 'pt': flagUrl = 'https://flagcdn.com/w20/pt.png'; break;
+                    case 'ru': flagUrl = 'https://flagcdn.com/w20/ru.png'; break;
+                    case 'zh-CN': flagUrl = 'https://flagcdn.com/w20/cn.png'; break;
+                    case 'nl': flagUrl = 'https://flagcdn.com/w20/nl.png'; break;
+                    case 'ar': flagUrl = 'https://flagcdn.com/w20/sa.png'; break;
+                }
+
+                if (flagUrl) {
+                    option.innerHTML = `<img src="${flagUrl}" width="20" alt="${option.text}"> ${option.text}`;
+                }
+            });
+        }
+    </script>
+
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="carousel">
@@ -1530,109 +1562,6 @@
                     behavior: 'smooth'
                 });
             });
-
-            // Translate button functionality
-            const translateBtn = document.querySelector('.translate-btn');
-            const languageDropdown = document.querySelector('.language-dropdown');
-
-            translateBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                languageDropdown.classList.toggle('show');
-            });
-
-            // Close the dropdown if clicked outside
-            document.addEventListener('click', function(event) {
-                if (!event.target.closest('.language-translator')) {
-                    languageDropdown.classList.remove('show');
-                }
-            });
-
-            // Handle language selection
-            const languageOptions = document.querySelectorAll('.language-option');
-            languageOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    translatePage(lang);
-                    languageDropdown.classList.remove('show');
-                });
-            });
-
-            // Function to translate the page
-            function translatePage(lang) {
-                // Update the translate button text and flag
-                const translateBtn = document.querySelector('.translate-btn');
-                const flagSrc = `https://flagcdn.com/w20/${getFlagCode(lang)}.png`;
-                const flagSrcSet = `https://flagcdn.com/w40/${getFlagCode(lang)}.png 2x`;
-                const languageName = getLanguageName(lang);
-
-                translateBtn.innerHTML = `
-                    <img src="${flagSrc}" srcset="${flagSrcSet}" width="20" alt="${languageName}">
-                    <span>${languageName}</span>
-                    <i class="fas fa-chevron-down"></i>
-                `;
-
-                // Use Google Translate API to translate the page
-                const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
-                const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
-
-                const elementsToTranslate = document.querySelectorAll('h1, h2, h3, h4, p, a, li, span, button, i');
-                elementsToTranslate.forEach(element => {
-                    const text = element.textContent;
-                    if (text.trim() !== '') {
-                        fetch(url, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                                q: text,
-                                target: lang
-                            })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.data && data.data.translations && data.data.translations.length > 0) {
-                                element.textContent = data.data.translations[0].translatedText;
-                            }
-                        })
-                        .catch(error => console.error('Error:', error));
-                    }
-                });
-            }
-
-            // Helper function to get flag code from language code
-            function getFlagCode(lang) {
-                const flagMap = {
-                    'en': 'gb',
-                    'es': 'es',
-                    'fr': 'fr',
-                    'de': 'de',
-                    'it': 'it',
-                    'pt': 'pt',
-                    'ru': 'ru',
-                    'zh-CN': 'cn',
-                    'nl': 'nl',
-                    'ar': 'sa'
-                };
-                return flagMap[lang] || 'gb';
-            }
-
-            // Helper function to get language name from language code
-            function getLanguageName(lang) {
-                const languageMap = {
-                    'en': 'English',
-                    'es': 'Spanish',
-                    'fr': 'French',
-                    'de': 'German',
-                    'it': 'Italian',
-                    'pt': 'Portuguese',
-                    'ru': 'Russian',
-                    'zh-CN': 'Chinese',
-                    'nl': 'Dutch',
-                    'ar': 'Arabic'
-                };
-                return languageMap[lang] || 'English';
-            }
         });
     </script>
 </body>
