@@ -8,7 +8,6 @@
     <title>Khayams International | Premium Sportswear Manufacturer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         /* Global Styles - Red Theme */
         :root {
@@ -127,7 +126,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
         }
         .logo {
             display: flex;
@@ -147,13 +145,8 @@
             line-height: 1.2;
         }
         .logo-text span {
-            color: var(--primary);
+            color: black;
             font-weight: 800;
-        }
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 30px;
         }
         .nav-links {
             display: flex;
@@ -190,101 +183,78 @@
             cursor: pointer;
             color: var(--dark);
         }
-        /* Language Translator Updates */
+        /* Language Translator */
         .language-translator {
             display: flex;
             align-items: center;
             gap: 10px;
-            position: fixed;
+            position: absolute;
             top: 20px;
             right: 20px;
             z-index: 100;
             transition: all 0.3s ease;
         }
         .translate-btn {
-            padding: 8px 12px;
+            padding: 8px 16px;
             background-color: var(--primary);
             color: white;
-            border-radius: 20px;
+            border-radius: 4px;
             border: none;
             cursor: pointer;
             font-size: 0.9rem;
+            transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: var(--transition);
-        }
-        .translate-btn img {
-            border-radius: 50%;
-            object-fit: cover;
+            gap: 5px;
         }
         .translate-btn:hover {
             background-color: var(--primary-dark);
-        }
-        .translate-btn i {
-            font-size: 0.7rem;
-            margin-left: 5px;
         }
         .goog-te-gadget {
             font-size: 0;
         }
         .goog-te-gadget .goog-te-combo {
             padding: 8px 12px;
-            border-radius: 20px;
+            border-radius: 4px;
             border: 1px solid #ddd;
             background: white;
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
             color: var(--dark);
         }
-        /* Flag styles for Google Translate dropdown */
-        .goog-te-gadget img {
-            display: none !important;
+        .translate-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            width: 250px;
+            max-height: 300px;
+            overflow-y: auto;
         }
-        .goog-te-gadget span {
-            display: inline-block;
-            padding: 0 5px;
+        .translate-dropdown.show {
+            display: flex;
         }
-        .goog-te-gadget span:before {
-            content: "";
-            display: inline-block;
-            width: 20px;
-            height: 15px;
-            margin-right: 5px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            vertical-align: middle;
+        .translate-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: var(--transition);
         }
-        /* Add specific flags for languages */
-        .goog-te-gadget span[value="en"]:before {
-            background-image: url('https://flagcdn.com/w20/gb.png');
+        .translate-option:hover {
+            background-color: #f1f5f9;
         }
-        .goog-te-gadget span[value="es"]:before {
-            background-image: url('https://flagcdn.com/w20/es.png');
-        }
-        .goog-te-gadget span[value="fr"]:before {
-            background-image: url('https://flagcdn.com/w20/fr.png');
-        }
-        .goog-te-gadget span[value="de"]:before {
-            background-image: url('https://flagcdn.com/w20/de.png');
-        }
-        .goog-te-gadget span[value="it"]:before {
-            background-image: url('https://flagcdn.com/w20/it.png');
-        }
-        .goog-te-gadget span[value="pt"]:before {
-            background-image: url('https://flagcdn.com/w20/pt.png');
-        }
-        .goog-te-gadget span[value="ru"]:before {
-            background-image: url('https://flagcdn.com/w20/ru.png');
-        }
-        .goog-te-gadget span[value="zh-CN"]:before {
-            background-image: url('https://flagcdn.com/w20/cn.png');
-        }
-        .goog-te-gadget span[value="nl"]:before {
-            background-image: url('https://flagcdn.com/w20/nl.png');
-        }
-        .goog-te-gadget span[value="ar"]:before {
-            background-image: url('https://flagcdn.com/w20/sa.png');
+        .translate-option img {
+            width: 24px;
+            height: 16px;
+            object-fit: contain;
         }
         /* Hero Section - Carousel */
         .hero {
@@ -1055,6 +1025,15 @@
             color: var(--dark);
             margin-top: auto;
         }
+        /* Hide translate button when header is scrolled */
+        header.header-scrolled .language-translator {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .hero-buttons {
+            gap: 20px;
+        }
     </style>
 </head>
 <body>
@@ -1072,33 +1051,72 @@
             <a href="index.html" class="logo">
                 <img src="https://raw.githubusercontent.com/khayamsinternational/Khayamswebsitemedia/refs/heads/main/Logo%20in%20Circle.png" alt="Khayams International Logo">
                 <div class="logo-text">
-                    <span>KHAYAMS</span>
-                    <span>INTERNATIONAL</span>
+                    <div>KHAYAMS</div>
+                    <div>INTERNATIONAL</div>
                 </div>
             </a>
-            <div class="nav-right">
-                <nav class="nav-links">
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About Us</a>
-                    <a href="products.html">Products</a>
-                    <a href="catalogue.html">Catalogue</a>
-                    <a href="contact.html">Contact</a>
-                </nav>
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="products.html">Products</a>
+                <a href="catalogue.html">Catalogue</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Language Translator -->
+        <div class="language-translator">
+            <button class="translate-btn">
+                <img src="https://flagcdn.com/w20/gb.png" srcset="https://flagcdn.com/w40/gb.png 2x" width="20" alt="English">
+                <span>Translate</span>
+            </button>
+            <div class="translate-dropdown">
+                <div class="translate-option" data-lang="en">
+                    <img src="https://flagcdn.com/w20/gb.png" srcset="https://flagcdn.com/w40/gb.png 2x" width="24" alt="English">
+                    <span>English</span>
+                </div>
+                <div class="translate-option" data-lang="es">
+                    <img src="https://flagcdn.com/w20/es.png" srcset="https://flagcdn.com/w40/es.png 2x" width="24" alt="Spanish">
+                    <span>Spanish</span>
+                </div>
+                <div class="translate-option" data-lang="fr">
+                    <img src="https://flagcdn.com/w20/fr.png" srcset="https://flagcdn.com/w40/fr.png 2x" width="24" alt="French">
+                    <span>French</span>
+                </div>
+                <div class="translate-option" data-lang="de">
+                    <img src="https://flagcdn.com/w20/de.png" srcset="https://flagcdn.com/w40/de.png 2x" width="24" alt="German">
+                    <span>German</span>
+                </div>
+                <div class="translate-option" data-lang="it">
+                    <img src="https://flagcdn.com/w20/it.png" srcset="https://flagcdn.com/w40/it.png 2x" width="24" alt="Italian">
+                    <span>Italian</span>
+                </div>
+                <div class="translate-option" data-lang="pt">
+                    <img src="https://flagcdn.com/w20/pt.png" srcset="https://flagcdn.com/w40/pt.png 2x" width="24" alt="Portuguese">
+                    <span>Portuguese</span>
+                </div>
+                <div class="translate-option" data-lang="ru">
+                    <img src="https://flagcdn.com/w20/ru.png" srcset="https://flagcdn.com/w40/ru.png 2x" width="24" alt="Russian">
+                    <span>Russian</span>
+                </div>
+                <div class="translate-option" data-lang="zh-CN">
+                    <img src="https://flagcdn.com/w20/cn.png" srcset="https://flagcdn.com/w40/cn.png 2x" width="24" alt="Chinese">
+                    <span>Chinese</span>
+                </div>
+                <div class="translate-option" data-lang="ar">
+                    <img src="https://flagcdn.com/w20/sa.png" srcset="https://flagcdn.com/w40/sa.png 2x" width="24" alt="Arabic">
+                    <span>Arabic</span>
+                </div>
+                <div class="translate-option" data-lang="nl">
+                    <img src="https://flagcdn.com/w20/nl.png" srcset="https://flagcdn.com/w40/nl.png 2x" width="24" alt="Dutch">
+                    <span>Dutch</span>
+                </div>
             </div>
+            <div id="google_translate_element" style="display: none;"></div>
         </div>
     </header>
-    <!-- Language Translator -->
-    <div class="language-translator">
-        <button class="translate-btn">
-            <img src="https://flagcdn.com/w20/gb.png" srcset="https://flagcdn.com/w40/gb.png 2x" width="20" alt="English">
-            <span>English</span>
-            <i class="fas fa-chevron-down"></i>
-        </button>
-        <div id="google_translate_element" style="display: none;"></div>
-    </div>
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="carousel">
@@ -1413,6 +1431,17 @@
             </div>
         </div>
     </footer>
+    <!-- Google Translate Script -->
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'ar,zh-CN,nl,en,fr,de,it,pt,ru,es',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Function to check if element is in viewport
@@ -1423,7 +1452,6 @@
                     rect.bottom >= 0
                 );
             }
-
             // Function to handle scroll animations
             function handleScrollAnimations() {
                 const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .zoom-in');
@@ -1433,26 +1461,19 @@
                     }
                 });
             }
-
             // Initial check on page load
             handleScrollAnimations();
-
             // Check on scroll
             window.addEventListener('scroll', handleScrollAnimations);
-
             // Header scroll effect
             window.addEventListener('scroll', function() {
                 const header = document.querySelector('header');
-                const languageTranslator = document.querySelector('.language-translator');
                 if (window.scrollY > 50) {
                     header.classList.add('header-scrolled');
-                    languageTranslator.classList.add('hidden');
                 } else {
                     header.classList.remove('header-scrolled');
-                    languageTranslator.classList.remove('hidden');
                 }
             });
-
             // Smooth scrolling for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -1466,14 +1487,12 @@
                     }
                 });
             });
-
             // Mobile menu toggle
             const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
             const navLinks = document.querySelector('.nav-links');
             mobileMenuBtn.addEventListener('click', function() {
                 navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
             });
-
             // Close mobile menu when clicking outside
             document.addEventListener('click', function(e) {
                 if (window.innerWidth <= 768 &&
@@ -1483,24 +1502,19 @@
                     navLinks.style.display = 'none';
                 }
             });
-
             // Carousel functionality
             const slides = document.querySelectorAll('.slide');
             let currentSlide = 0;
-
             function showSlide(n) {
                 slides[currentSlide].classList.remove('active');
                 currentSlide = (n + slides.length) % slides.length;
                 slides[currentSlide].classList.add('active');
             }
-
             function nextSlide() {
                 showSlide(currentSlide + 1);
             }
-
             // Auto-advance slides every 5 seconds
             setInterval(nextSlide, 5000);
-
             // Scroll to top functionality
             const scrollTopBtn = document.querySelector('.scroll-top-btn');
             window.addEventListener('scroll', function() {
@@ -1510,7 +1524,6 @@
                     scrollTopBtn.classList.remove('show');
                 }
             });
-
             scrollTopBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 window.scrollTo({
@@ -1518,44 +1531,42 @@
                     behavior: 'smooth'
                 });
             });
-        });
-
-        // Google Translate script
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement(
-                {pageLanguage: 'en', includedLanguages: 'ar,zh-CN,nl,en,fr,de,it,pt,ru,es', layout: google.translate.TranslateElement.InlineLayout.SIMPLE},
-                'google_translate_element'
-            );
-
-            // Add flags to language options after a short delay
-            setTimeout(addFlagsToLanguageOptions, 500);
-        }
-
-        function addFlagsToLanguageOptions() {
-            const languageOptions = document.querySelectorAll('.goog-te-combo option');
-            languageOptions.forEach(option => {
-                const langCode = option.value;
-                let flagUrl = '';
-
-                switch(langCode) {
-                    case 'en': flagUrl = 'https://flagcdn.com/w20/gb.png'; break;
-                    case 'es': flagUrl = 'https://flagcdn.com/w20/es.png'; break;
-                    case 'fr': flagUrl = 'https://flagcdn.com/w20/fr.png'; break;
-                    case 'de': flagUrl = 'https://flagcdn.com/w20/de.png'; break;
-                    case 'it': flagUrl = 'https://flagcdn.com/w20/it.png'; break;
-                    case 'pt': flagUrl = 'https://flagcdn.com/w20/pt.png'; break;
-                    case 'ru': flagUrl = 'https://flagcdn.com/w20/ru.png'; break;
-                    case 'zh-CN': flagUrl = 'https://flagcdn.com/w20/cn.png'; break;
-                    case 'nl': flagUrl = 'https://flagcdn.com/w20/nl.png'; break;
-                    case 'ar': flagUrl = 'https://flagcdn.com/w20/sa.png'; break;
-                }
-
-                if (flagUrl) {
-                    option.innerHTML = `<img src="${flagUrl}" width="20" alt="${option.text}"> ${option.text}`;
+            // Translate button functionality
+            const translateBtn = document.querySelector('.translate-btn');
+            const translateDropdown = document.querySelector('.translate-dropdown');
+            translateBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                translateDropdown.classList.toggle('show');
+            });
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.language-translator')) {
+                    translateDropdown.classList.remove('show');
                 }
             });
-        }
+            // Language selection
+            const translateOptions = document.querySelectorAll('.translate-option');
+            translateOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    const select = document.querySelector('.goog-te-combo');
+                    if (select) {
+                        select.value = lang;
+                        select.dispatchEvent(new Event('change'));
+                    }
+                    translateDropdown.classList.remove('show');
+                });
+            });
+            // Footer scroll effect
+            window.addEventListener('scroll', function() {
+                const footer = document.querySelector('footer');
+                if (window.scrollY > 50) {
+                    footer.classList.add('scrolled');
+                } else {
+                    footer.classList.remove('scrolled');
+                }
+            });
+        });
     </script>
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
