@@ -190,6 +190,102 @@
             cursor: pointer;
             color: var(--dark);
         }
+        /* Language Translator Updates */
+        .language-translator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        .translate-btn {
+            padding: 8px 12px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        .translate-btn img {
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .translate-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        .translate-btn i {
+            font-size: 0.7rem;
+            margin-left: 5px;
+        }
+        .goog-te-gadget {
+            font-size: 0;
+        }
+        .goog-te-gadget .goog-te-combo {
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            background: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+        /* Flag styles for Google Translate dropdown */
+        .goog-te-gadget img {
+            display: none !important;
+        }
+        .goog-te-gadget span {
+            display: inline-block;
+            padding: 0 5px;
+        }
+        .goog-te-gadget span:before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 15px;
+            margin-right: 5px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            vertical-align: middle;
+        }
+        /* Add specific flags for languages */
+        .goog-te-gadget span[value="en"]:before {
+            background-image: url('https://flagcdn.com/w20/gb.png');
+        }
+        .goog-te-gadget span[value="es"]:before {
+            background-image: url('https://flagcdn.com/w20/es.png');
+        }
+        .goog-te-gadget span[value="fr"]:before {
+            background-image: url('https://flagcdn.com/w20/fr.png');
+        }
+        .goog-te-gadget span[value="de"]:before {
+            background-image: url('https://flagcdn.com/w20/de.png');
+        }
+        .goog-te-gadget span[value="it"]:before {
+            background-image: url('https://flagcdn.com/w20/it.png');
+        }
+        .goog-te-gadget span[value="pt"]:before {
+            background-image: url('https://flagcdn.com/w20/pt.png');
+        }
+        .goog-te-gadget span[value="ru"]:before {
+            background-image: url('https://flagcdn.com/w20/ru.png');
+        }
+        .goog-te-gadget span[value="zh-CN"]:before {
+            background-image: url('https://flagcdn.com/w20/cn.png');
+        }
+        .goog-te-gadget span[value="nl"]:before {
+            background-image: url('https://flagcdn.com/w20/nl.png');
+        }
+        .goog-te-gadget span[value="ar"]:before {
+            background-image: url('https://flagcdn.com/w20/sa.png');
+        }
         /* Hero Section - Carousel */
         .hero {
             position: relative;
@@ -1003,146 +1099,6 @@
         </button>
         <div id="google_translate_element" style="display: none;"></div>
     </div>
-
-    <style>
-        /* Language Translator Updates */
-        .language-translator {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-            transition: all 0.3s ease;
-        }
-        .translate-btn {
-            padding: 8px 12px;
-            background-color: var(--primary);
-            color: white;
-            border-radius: 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--transition);
-        }
-        .translate-btn img {
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        .translate-btn:hover {
-            background-color: var(--primary-dark);
-        }
-        .translate-btn i {
-            font-size: 0.7rem;
-            margin-left: 5px;
-        }
-        .goog-te-gadget {
-            font-size: 0;
-        }
-        .goog-te-gadget .goog-te-combo {
-            padding: 8px 12px;
-            border-radius: 20px;
-            border: 1px solid #ddd;
-            background: white;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            color: var(--dark);
-        }
-        /* Flag styles for Google Translate dropdown */
-        .goog-te-gadget img {
-            display: none !important;
-        }
-        .goog-te-gadget span {
-            display: inline-block;
-            padding: 0 5px;
-        }
-        .goog-te-gadget span:before {
-            content: "";
-            display: inline-block;
-            width: 20px;
-            height: 15px;
-            margin-right: 5px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            vertical-align: middle;
-        }
-        /* Add specific flags for languages */
-        .goog-te-gadget span[value="en"]:before {
-            background-image: url('https://flagcdn.com/w20/gb.png');
-        }
-        .goog-te-gadget span[value="es"]:before {
-            background-image: url('https://flagcdn.com/w20/es.png');
-        }
-        .goog-te-gadget span[value="fr"]:before {
-            background-image: url('https://flagcdn.com/w20/fr.png');
-        }
-        .goog-te-gadget span[value="de"]:before {
-            background-image: url('https://flagcdn.com/w20/de.png');
-        }
-        .goog-te-gadget span[value="it"]:before {
-            background-image: url('https://flagcdn.com/w20/it.png');
-        }
-        .goog-te-gadget span[value="pt"]:before {
-            background-image: url('https://flagcdn.com/w20/pt.png');
-        }
-        .goog-te-gadget span[value="ru"]:before {
-            background-image: url('https://flagcdn.com/w20/ru.png');
-        }
-        .goog-te-gadget span[value="zh-CN"]:before {
-            background-image: url('https://flagcdn.com/w20/cn.png');
-        }
-        .goog-te-gadget span[value="nl"]:before {
-            background-image: url('https://flagcdn.com/w20/nl.png');
-        }
-        .goog-te-gadget span[value="ar"]:before {
-            background-image: url('https://flagcdn.com/w20/sa.png');
-        }
-    </style>
-
-    <script>
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'ar,zh-CN,nl,en,fr,de,it,pt,ru,es',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
-
-            // Add flags to language options after a short delay
-            setTimeout(addFlagsToLanguageOptions, 500);
-        }
-
-        function addFlagsToLanguageOptions() {
-            const languageOptions = document.querySelectorAll('.goog-te-combo option');
-            languageOptions.forEach(option => {
-                const langCode = option.value;
-                let flagUrl = '';
-
-                switch(langCode) {
-                    case 'en': flagUrl = 'https://flagcdn.com/w20/gb.png'; break;
-                    case 'es': flagUrl = 'https://flagcdn.com/w20/es.png'; break;
-                    case 'fr': flagUrl = 'https://flagcdn.com/w20/fr.png'; break;
-                    case 'de': flagUrl = 'https://flagcdn.com/w20/de.png'; break;
-                    case 'it': flagUrl = 'https://flagcdn.com/w20/it.png'; break;
-                    case 'pt': flagUrl = 'https://flagcdn.com/w20/pt.png'; break;
-                    case 'ru': flagUrl = 'https://flagcdn.com/w20/ru.png'; break;
-                    case 'zh-CN': flagUrl = 'https://flagcdn.com/w20/cn.png'; break;
-                    case 'nl': flagUrl = 'https://flagcdn.com/w20/nl.png'; break;
-                    case 'ar': flagUrl = 'https://flagcdn.com/w20/sa.png'; break;
-                }
-
-                if (flagUrl) {
-                    option.innerHTML = `<img src="${flagUrl}" width="20" alt="${option.text}"> ${option.text}`;
-                }
-            });
-        }
-    </script>
-
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="carousel">
@@ -1563,6 +1519,43 @@
                 });
             });
         });
+
+        // Google Translate script
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en', includedLanguages: 'ar,zh-CN,nl,en,fr,de,it,pt,ru,es', layout: google.translate.TranslateElement.InlineLayout.SIMPLE},
+                'google_translate_element'
+            );
+
+            // Add flags to language options after a short delay
+            setTimeout(addFlagsToLanguageOptions, 500);
+        }
+
+        function addFlagsToLanguageOptions() {
+            const languageOptions = document.querySelectorAll('.goog-te-combo option');
+            languageOptions.forEach(option => {
+                const langCode = option.value;
+                let flagUrl = '';
+
+                switch(langCode) {
+                    case 'en': flagUrl = 'https://flagcdn.com/w20/gb.png'; break;
+                    case 'es': flagUrl = 'https://flagcdn.com/w20/es.png'; break;
+                    case 'fr': flagUrl = 'https://flagcdn.com/w20/fr.png'; break;
+                    case 'de': flagUrl = 'https://flagcdn.com/w20/de.png'; break;
+                    case 'it': flagUrl = 'https://flagcdn.com/w20/it.png'; break;
+                    case 'pt': flagUrl = 'https://flagcdn.com/w20/pt.png'; break;
+                    case 'ru': flagUrl = 'https://flagcdn.com/w20/ru.png'; break;
+                    case 'zh-CN': flagUrl = 'https://flagcdn.com/w20/cn.png'; break;
+                    case 'nl': flagUrl = 'https://flagcdn.com/w20/nl.png'; break;
+                    case 'ar': flagUrl = 'https://flagcdn.com/w20/sa.png'; break;
+                }
+
+                if (flagUrl) {
+                    option.innerHTML = `<img src="${flagUrl}" width="20" alt="${option.text}"> ${option.text}`;
+                }
+            });
+        }
     </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
