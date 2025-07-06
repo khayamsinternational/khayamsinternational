@@ -8,6 +8,7 @@
     <title>Khayams International | Premium Sportswear Manufacturer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         /* Global Styles - Red Theme */
         :root {
@@ -1570,21 +1571,33 @@
                     <i class="fas fa-chevron-down"></i>
                 `;
 
-                // Here you would typically call a translation API
-                // For demonstration purposes, we'll just log the language
-                console.log('Translating to:', lang);
+                // Use Google Translate API to translate the page
+                const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
+                const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
 
-                // Example API call (pseudo-code):
-                // fetch(`your-translation-api-endpoint?lang=${lang}`)
-                //     .then(response => response.json())
-                //     .then(data => {
-                //         // Apply translations to the page
-                //         document.querySelectorAll('[data-translate]').forEach(element => {
-                //             const key = element.getAttribute('data-translate');
-                //             element.textContent = data[key];
-                //         });
-                //     })
-                //     .catch(error => console.error('Error:', error));
+                const elementsToTranslate = document.querySelectorAll('h1, h2, h3, h4, p, a, li, span, button, i');
+                elementsToTranslate.forEach(element => {
+                    const text = element.textContent;
+                    if (text.trim() !== '') {
+                        fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                q: text,
+                                target: lang
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.data && data.data.translations && data.data.translations.length > 0) {
+                                element.textContent = data.data.translations[0].translatedText;
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                    }
+                });
             }
 
             // Helper function to get flag code from language code
