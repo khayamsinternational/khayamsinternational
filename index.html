@@ -126,6 +126,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
         .logo {
             display: flex;
@@ -147,6 +148,11 @@
         .logo-text span {
             color: var(--primary);
             font-weight: 800;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
         }
         .nav-links {
             display: flex;
@@ -183,16 +189,12 @@
             cursor: pointer;
             color: var(--dark);
         }
-        /* Language Translator Updates */
+        /* Language Translator */
         .language-translator {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            position: absolute;
+            position: fixed;
             top: 20px;
             right: 20px;
-            z-index: 100;
-            transition: all 0.3s ease;
+            z-index: 101;
         }
         .translate-btn {
             padding: 8px 12px;
@@ -218,66 +220,35 @@
             font-size: 0.7rem;
             margin-left: 5px;
         }
-        .goog-te-gadget {
-            font-size: 0;
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            z-index: 1;
+            right: 0;
+            top: 100%;
+            margin-top: 5px;
         }
-        .goog-te-gadget .goog-te-combo {
-            padding: 8px 12px;
-            border-radius: 20px;
-            border: 1px solid #ddd;
-            background: white;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            color: var(--dark);
+        .language-dropdown.show {
+            display: block;
         }
-        /* Flag styles for Google Translate dropdown */
-        .goog-te-gadget img {
-            display: none !important;
+        .language-option {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-        .goog-te-gadget span {
-            display: inline-block;
-            padding: 0 5px;
+        .language-option:hover {
+            background-color: #f1f1f1;
         }
-        .goog-te-gadget span:before {
-            content: "";
-            display: inline-block;
+        .language-option img {
             width: 20px;
-            height: 15px;
-            margin-right: 5px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            vertical-align: middle;
-        }
-        /* Add specific flags for languages */
-        .goog-te-gadget span[value="en"]:before {
-            background-image: url('https://flagcdn.com/w20/gb.png');
-        }
-        .goog-te-gadget span[value="es"]:before {
-            background-image: url('https://flagcdn.com/w20/es.png');
-        }
-        .goog-te-gadget span[value="fr"]:before {
-            background-image: url('https://flagcdn.com/w20/fr.png');
-        }
-        .goog-te-gadget span[value="de"]:before {
-            background-image: url('https://flagcdn.com/w20/de.png');
-        }
-        .goog-te-gadget span[value="it"]:before {
-            background-image: url('https://flagcdn.com/w20/it.png');
-        }
-        .goog-te-gadget span[value="pt"]:before {
-            background-image: url('https://flagcdn.com/w20/pt.png');
-        }
-        .goog-te-gadget span[value="ru"]:before {
-            background-image: url('https://flagcdn.com/w20/ru.png');
-        }
-        .goog-te-gadget span[value="zh-CN"]:before {
-            background-image: url('https://flagcdn.com/w20/cn.png');
-        }
-        .goog-te-gadget span[value="nl"]:before {
-            background-image: url('https://flagcdn.com/w20/nl.png');
-        }
-        .goog-te-gadget span[value="ar"]:before {
-            background-image: url('https://flagcdn.com/w20/sa.png');
+            border-radius: 50%;
         }
         /* Hero Section - Carousel */
         .hero {
@@ -1078,27 +1049,70 @@
                     <span>INTERNATIONAL</span>
                 </div>
             </a>
-            <nav class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="about.html">About Us</a>
-                <a href="products.html">Products</a>
-                <a href="catalogue.html">Catalogue</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-        <!-- Language Translator -->
-        <div class="language-translator">
-            <button class="translate-btn">
-                <img src="https://flagcdn.com/w20/gb.png" srcset="https://flagcdn.com/w40/gb.png 2x" width="20" alt="English">
-                <span>English</span>
-                <i class="fas fa-chevron-down"></i>
-            </button>
-            <div id="google_translate_element" style="display: none;"></div>
+            <div class="nav-right">
+                <nav class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="products.html">Products</a>
+                    <a href="catalogue.html">Catalogue</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </header>
+    <!-- Language Translator -->
+    <div class="language-translator">
+        <button class="translate-btn">
+            <img src="https://flagcdn.com/w20/gb.png" srcset="https://flagcdn.com/w40/gb.png 2x" width="20" alt="English">
+            <span>English</span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="language-dropdown">
+            <div class="language-option" data-lang="en">
+                <img src="https://flagcdn.com/w20/gb.png" alt="English">
+                <span>English</span>
+            </div>
+            <div class="language-option" data-lang="es">
+                <img src="https://flagcdn.com/w20/es.png" alt="Spanish">
+                <span>Spanish</span>
+            </div>
+            <div class="language-option" data-lang="fr">
+                <img src="https://flagcdn.com/w20/fr.png" alt="French">
+                <span>French</span>
+            </div>
+            <div class="language-option" data-lang="de">
+                <img src="https://flagcdn.com/w20/de.png" alt="German">
+                <span>German</span>
+            </div>
+            <div class="language-option" data-lang="it">
+                <img src="https://flagcdn.com/w20/it.png" alt="Italian">
+                <span>Italian</span>
+            </div>
+            <div class="language-option" data-lang="pt">
+                <img src="https://flagcdn.com/w20/pt.png" alt="Portuguese">
+                <span>Portuguese</span>
+            </div>
+            <div class="language-option" data-lang="ru">
+                <img src="https://flagcdn.com/w20/ru.png" alt="Russian">
+                <span>Russian</span>
+            </div>
+            <div class="language-option" data-lang="zh-CN">
+                <img src="https://flagcdn.com/w20/cn.png" alt="Chinese">
+                <span>Chinese</span>
+            </div>
+            <div class="language-option" data-lang="nl">
+                <img src="https://flagcdn.com/w20/nl.png" alt="Dutch">
+                <span>Dutch</span>
+            </div>
+            <div class="language-option" data-lang="ar">
+                <img src="https://flagcdn.com/w20/sa.png" alt="Arabic">
+                <span>Arabic</span>
+            </div>
+        </div>
+    </div>
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="carousel">
@@ -1413,45 +1427,6 @@
             </div>
         </div>
     </footer>
-    <!-- Google Translate Script -->
-    <script>
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'ar,zh-CN,nl,en,fr,de,it,pt,ru,es',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
-
-            // Add flags to language options after a short delay
-            setTimeout(addFlagsToLanguageOptions, 500);
-        }
-
-        function addFlagsToLanguageOptions() {
-            const languageOptions = document.querySelectorAll('.goog-te-combo option');
-            languageOptions.forEach(option => {
-                const langCode = option.value;
-                let flagUrl = '';
-
-                switch(langCode) {
-                    case 'en': flagUrl = 'https://flagcdn.com/w20/gb.png'; break;
-                    case 'es': flagUrl = 'https://flagcdn.com/w20/es.png'; break;
-                    case 'fr': flagUrl = 'https://flagcdn.com/w20/fr.png'; break;
-                    case 'de': flagUrl = 'https://flagcdn.com/w20/de.png'; break;
-                    case 'it': flagUrl = 'https://flagcdn.com/w20/it.png'; break;
-                    case 'pt': flagUrl = 'https://flagcdn.com/w20/pt.png'; break;
-                    case 'ru': flagUrl = 'https://flagcdn.com/w20/ru.png'; break;
-                    case 'zh-CN': flagUrl = 'https://flagcdn.com/w20/cn.png'; break;
-                    case 'nl': flagUrl = 'https://flagcdn.com/w20/nl.png'; break;
-                    case 'ar': flagUrl = 'https://flagcdn.com/w20/sa.png'; break;
-                }
-
-                if (flagUrl) {
-                    option.innerHTML = `<img src="${flagUrl}" width="20" alt="${option.text}"> ${option.text}`;
-                }
-            });
-        }
-    </script>
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Function to check if element is in viewport
@@ -1541,21 +1516,51 @@
                     behavior: 'smooth'
                 });
             });
+
             // Translate button functionality
             const translateBtn = document.querySelector('.translate-btn');
-            const translateWidget = document.querySelector('#google_translate_element');
-            translateBtn.addEventListener('click', function() {
-                translateWidget.style.display = translateWidget.style.display === 'none' ? 'block' : 'none';
+            const languageDropdown = document.querySelector('.language-dropdown');
+
+            translateBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                languageDropdown.classList.toggle('show');
             });
-            // Footer scroll effect
-            window.addEventListener('scroll', function() {
-                const footer = document.querySelector('footer');
-                if (window.scrollY > 50) {
-                    footer.classList.add('scrolled');
-                } else {
-                    footer.classList.remove('scrolled');
+
+            // Close the dropdown if clicked outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.language-translator')) {
+                    languageDropdown.classList.remove('show');
                 }
             });
+
+            // Handle language selection
+            const languageOptions = document.querySelectorAll('.language-option');
+            languageOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    translatePage(lang);
+                    languageDropdown.classList.remove('show');
+                });
+            });
+
+            // Function to translate the page
+            function translatePage(lang) {
+                // Here you would typically call a translation API
+                // For demonstration purposes, we'll just log the language
+                console.log('Translating to:', lang);
+                alert('Translating to: ' + lang);
+                // Example API call (pseudo-code):
+                // fetch(`your-translation-api-endpoint?lang=${lang}`)
+                //     .then(response => response.json())
+                //     .then(data => {
+                //         // Apply translations to the page
+                //         document.querySelectorAll('[data-translate]').forEach(element => {
+                //             const key = element.getAttribute('data-translate');
+                //             element.textContent = data[key];
+                //         });
+                //     })
+                //     .catch(error => console.error('Error:', error));
+            }
         });
     </script>
 </body>
