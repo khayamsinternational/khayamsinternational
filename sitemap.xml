@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.example.com/index.html</loc>
+    <loc>https://www.khayamsinternational.com/index.html</loc>
   </url>
   <url>
-    <loc>https://www.example.com/soccerwear</loc>
+    <loc>https://www.khayamsinternational.com/about.html</loc>
   </url>
   <url>
-    <loc>https://www.example.com/about.html</loc>
+    <loc>https://www.khayamsinternational.com/products.html</loc>
   </url>
   <url>
-    <loc>https://www.example.com/contact.html</loc>
+    <loc>https://www.khayamsinternational.com/catalogue.html</loc>
+  </url>
+  <url>
+    <loc>https://www.khayamsinternational.com/contact.html</loc>
+  </url>
+  <url>
+    <loc>https://www.khayamsinternational.com/sportswear.html</loc>
+  </url>
+  <url>
+    <loc>https://www.khayamsinternational.com/activewear.html</loc>
+  </url>
+  <url>
+    <loc>https://www.khayamsinternational.com/soccerwear.html</loc>
+  </url>
+  <url>
+    <loc>https://www.khayamsinternational.com/privacypolicy.html</loc>
+  </url>
+  <url>
+    <loc>https://www.khayamsinternational.com/terms&conditions.html</loc>
   </url>
 </urlset>
