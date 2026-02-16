@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.khayamsinternational.com/index.html</loc>
+    <loc>https://www.khayamsinternational.com/</loc>
   </url>
   <url>
-    <loc>https://www.khayamsinternational.com/about.html</loc>
+    <loc>https://www.khayamsinternational.com/about</loc>
   </url>
   <url>
-    <loc>https://www.khayamsinternational.com/products.html</loc>
+    <loc>https://www.khayamsinternational.com/products</loc>
   </url>
   <url>
-    <loc>https://www.khayamsinternational.com/catalogue.html</loc>
+    <loc>https://www.khayamsinternational.com/catalogue</loc>
   </url>
   <url>
-    <loc>https://www.khayamsinternational.com/contact.html</loc>
+    <loc>https://www.khayamsinternational.com/contact</loc>
   </url>
   <url>
-    <loc>https://www.khayamsinternational.com/sportswear.html</loc>
+    <loc>https://www.khayamsinternational.com/sportswear</loc>
   </url>
   <url>
-    <loc>https://www.khayamsinternational.com/activewear.html</loc>
+    <loc>https://www.khayamsinternational.com/activewear</loc>
   </url>
   <url>
-    <loc>https://www.khayamsinternational.com/soccerwear.html</loc>
+    <loc>https://www.khayamsinternational.com/soccerwear</loc>
   </url>
   <url>
-    <loc>https://www.khayamsinternational.com/privacypolicy.html</loc>
+    <loc>https://www.khayamsinternational.com/privacypolicy</loc>
+  </url>
+  <url>
+    <loc>https://www.khayamsinternational.com/terms&conditions</loc>
   </url>
 </urlset>
